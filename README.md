@@ -12,7 +12,7 @@ Migrations are given as a map of names to functions. "Up" migration names start 
 `dsm.sql` depends on a working SQL database connection, which is used to record migration progress and is given as the first argument to all migration functions.
 
 ```clj
-[dsm "0.1.0"]
+[dsm "0.0.0"]
 ```
 
 ## Usage
@@ -62,12 +62,13 @@ drop index user_usernames;
 
 ## TODO
 
-[ ] Write core tests
-[ ] Publish to Clojars
+- [ ] Write core tests
+
+- [ ] Publish to Clojars
 
 ## License
 
-Copyright © 2018 Duncan Smith
+Copyright © 2019 Duncan Smith
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
