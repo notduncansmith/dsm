@@ -1,9 +1,10 @@
-(defproject dsm "0.0.1-SNAPSHOT"
+(defproject dsm "0.0.3-SNAPSHOT"
   :description "dsm (short for \"dead simple migrations\") is a small Clojure library designed to run migration functions."
   :url "https://github.com/notduncansmith/dsm"
   :license {:name "Eclipse Public License"
             :url  "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[com.layerware/hugsql "0.4.9"]]
+  :dependencies [[com.layerware/hugsql "0.4.9"]
+                 [org.xerial/sqlite-jdbc "3.23.1"]]
   :plugins [[lein-cloverage "1.0.13"]
             [lein-shell "0.5.0"]
             [lein-ancient "0.6.15"]

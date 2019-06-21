@@ -1,33 +1,33 @@
 (ns dsm.core)
 
-(defn up-migrations [migrations current-version target-version]
-  "All UP migrations between the most-recently-run and `target-version`"
-  ([migrations target-version
-    (->> (keys migrations)
-         (filter is-up-migration)
-         (sort <) ; note ascending sort
-         (take target-version)
-         (drop current-version))])
-  ([migrations] (up-migrations migrations (count (keys migrations)))))
+(defn- starts-with? [substr str] (= substr (subs str 0 (.length substr))))
 
-(defn down-migrations [migrations current-version target-version]
-  "All DOWN migrations between the most-recently-run and `target-version`"
-  ([migrations target-version
-    (->> (keys migrations)
-         (filter is-down-migration)
-         (sort >) ; note decending sort (reverse of above)
-         (take (- current-version target-version)))])
-  ([migrations] (up-migrations migrations (count (keys migrations)))))
+(defn is-up-migration [mname] (starts-with? "-UP-" mname))
+(defn is-down-migration [mname] (starts-with? "-DOWN-" mname))
 
-(defn is-up-migration [name]
-  (or (starts-with "⬆" name)
-      (matches? #"^-UP\-.*" name)))
+(defn up-migrations
+  "All UP migrations between `current-version` and `target-version`"
+  ([migrations current-version target-version]
+   (->> (keys migrations)
+        (map name)
+        (filter is-up-migration)
+        (sort)
+        (take target-version)
+        (drop current-version)
+        (vec)))
+  ([migrations current-version]
+   (up-migrations migrations current-version (count (keys migrations)))))
 
-(defn is-down-migration [name]
-  (or (starts-with "⬇" name)
-      (matches? #"^-DOWN\-.*" name)))
-
-(defn- matches? [pattern str]
-  (->> str (re-find (re-matcher pattern))
-           (count)
-           (> 0)))
+(defn down-migrations
+  "All DOWN migrations between `current-version` and `target-version`"
+  ([migrations current-version target-version]
+   (->> (keys migrations)
+        (map name)
+        (filter is-down-migration)
+        (sort)
+        (take current-version)
+        (drop target-version)
+        (reverse)
+        (vec)))
+  ([migrations current-version]
+   (down-migrations migrations current-version 0)))

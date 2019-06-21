@@ -24,8 +24,7 @@ Migrations are given as a map of names to functions. "Up" migration names start 
 
 (def conn {:classname "org.sqlite.JDBC"
            :subprotocol "sqlite"
-           :subname (or (System/getenv "AWESOME_DB_PATH")
-                        "./resources/awesome.db")})
+           :subname "./resources/awesome.db"})
 
 ; First, using the magic of HugSQL, define migrations
 (def migrations (map-of-db-fns-from-string "
@@ -44,14 +43,14 @@ create table if not exists \"users\" (
 );
 
 -- :name -DOWN-m3-drop-users-table :!
-drop table \"users\";
+drop table if exists \"users\";
 
 -- :name -UP-m4-create-unique-username-index :!
 create unique index if not exists user_usernames on \"users\" (\"username\");
 
 -- :name -DOWN-m4-drop-unique-username-index :!
-drop index user_usernames;
-")
+drop index if exists user_usernames;
+"))
 
 ; Next, we create a place to store our migration state
 (create-migrations-table conn)
