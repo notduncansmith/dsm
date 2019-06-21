@@ -57,12 +57,6 @@ drop index if exists user_usernames;
 (migrate-up conn migrations 4)
 ```
 
-## TODO
-
-- [ ] Write core tests
-
-- [ ] Publish to Clojars
-
 ## License
 
 Copyright © 2019 Duncan Smith
