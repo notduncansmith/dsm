@@ -1,6 +1,4 @@
 # dsm
-[![Build Status](https://travis-ci.org/notduncansmith/dsm.svg?branch=master)](https://travis-ci.org/notduncansmith/dsm)
-[![codecov](https://codecov.io/gh/notduncansmith/dsm/branch/master/graph/badge.svg)](https://codecov.io/gh/notduncansmith/dsm)
 [![Clojars Project](https://img.shields.io/clojars/v/dsm.svg)](https://clojars.org/dsm)
 
 dsm (short for "dead simple migrations") is a small Clojure library designed to run migration functions.
