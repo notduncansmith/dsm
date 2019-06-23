@@ -29,8 +29,14 @@ Migrations are given as a map of names to functions. "Up" migration names start 
 -- :name -UP-m1-wal-pragma :*
 pragma journal_mode = WAL;
 
+-- :name -DOWN-m1-wal-pragma :?
+select 1; -- does nothing, this pragma is permanent
+
 -- :name -UP-m2-foreign-key-pragma :!
 pragma foreign_keys = on;
+
+-- :name -DOWN-m2-foreign-key-pragma :?
+select 1; -- does nothing, this pragma is permanent
 
 -- :name -UP-m3-create-users-table :!
 create table if not exists \"users\" (
@@ -39,7 +45,6 @@ create table if not exists \"users\" (
   \"username\" char(128) not null,
   \"access_token\" char(128) not null
 );
-
 -- :name -DOWN-m3-drop-users-table :!
 drop table if exists \"users\";
 
