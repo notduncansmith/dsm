@@ -17,7 +17,7 @@ Migrations are given as a map of names to functions. "Up" migration names start 
 
 ```clj
 (ns my-awesome-app.core
-    (:require [dsm.sql :refer [create-migrations-table migrate-up]]
+    (:require [dsm.sql :refer [create-migrations-table migrate-up migrate-down]]
               [hugsql.core :refer [map-of-db-fns-from-string]]))
 
 (def conn {:classname "org.sqlite.JDBC"
@@ -58,8 +58,14 @@ drop index if exists user_usernames;
 ; Next, we create a place to store our migration state
 (create-migrations-table conn)
 
-; Finally, run the migrations!
-(migrate-up conn migrations 4)
+; Finally, run any pending migrations!
+(migrate-up conn migrations) 
+
+; We can roll back to a target version
+(migrate-down conn migrations 3)
+
+; And migrate up again to a desired version
+(migrate-down conn migrations 4)
 ```
 
 ## License
