@@ -36,7 +36,7 @@ select 1; -- does nothing, this pragma is permanent
 pragma foreign_keys = on;
 
 -- :name -DOWN-m2-foreign-key-pragma :?
-select 1; -- does nothing, this pragma is permanent
+pragma foreign_keys = off;
 
 -- :name -UP-m3-create-users-table :!
 create table if not exists \"users\" (
