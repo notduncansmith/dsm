@@ -16,7 +16,7 @@ Migrations are given as a map of names to functions. "Up" migration names start 
 ## Usage
 
 ```clj
-(ns my-awesome-app.core
+(ns my-awesome-app.schema
     (:require [dsm.sql :refer [create-migrations-table migrate-up migrate-down]]
               [hugsql.core :refer [map-of-db-fns-from-string]]))
 
