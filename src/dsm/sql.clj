@@ -5,7 +5,7 @@
 (def default-conn
   {:classname "org.sqlite.JDBC"
    :subprotocol "sqlite"
-   :subname "./resources/data.db"})
+   :subname "./data.db"})
 
 (def-db-fns-from-string "
 -- :name create-migrations-table :!
