@@ -10,7 +10,7 @@ Migrations are given as a map of names to functions. "Up" migration names start 
 `dsm.sql` depends on a working SQL database connection, which is used to record migration progress and is given as the first argument to all migration functions.
 
 ```clj
-[dsm "0.0.3-SNAPSHOT"]
+[dsm "0.0.4-SNAPSHOT"]
 ```
 
 ## Usage
